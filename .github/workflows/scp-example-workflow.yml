@@ -17,6 +17,7 @@ jobs:
           mkdir test
           touch test/oof.txt
           touch test/.dot.txt
+          touch test/dummy.js
       - name: Copy folder content recursively to remote
         uses: ./
         with:
@@ -104,3 +105,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           rmRemote: true
           port: ${{ secrets.SSH_PORT }}
+          exclude: "*.js"
