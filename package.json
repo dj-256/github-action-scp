@@ -1,14 +1,14 @@
 {
-  "name": "@garygrossgarten/github-action-scp",
-  "version": "0.7.3",
+  "name": "@dj-256/github-action-scp",
+  "version": "0.7.4",
   "description": "Copy a folder to a remote server using SSH.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/garygrossgarten/github-action-ssh"
+    "url": "https://github.com/dj-256/github-action-ssh"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p .",
     "format": "prettier --write **/*.ts",
     "format-check": "prettier --check **/*.ts",
     "pack": "ncc build"
