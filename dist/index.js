@@ -219,7 +219,7 @@ function parseExclude(path) {
     let res;
     res = path.replace(/\*/g, '.*');
     res = res.replace(/\./g, '\\.');
-    res = '^' + res + '$';
+    res = res;
     return res;
 }
 process.on('uncaughtException', (err) => {

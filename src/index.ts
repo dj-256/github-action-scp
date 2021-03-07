@@ -249,7 +249,7 @@ function parseExclude(path: string) {
   let res: string;
   res = path.replace(/\*/g, '.*');
   res = res.replace(/\./g, '\\.');
-  res = '^'+res+'$';
+  res = res;
   return res;
 }
 
