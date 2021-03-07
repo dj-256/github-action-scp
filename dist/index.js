@@ -143,13 +143,13 @@ function scp(ssh, local, remote, dotfiles = false, concurrency, verbose = true, 
 }
 function putDirectory(ssh, local, remote, dotfiles = false, concurrency = 3, verbose = false, recursive = true, exclude) {
     return __awaiter(this, void 0, void 0, function* () {
-        const exclude_r = new RegExp(parseExclude(exclude));
+        const exclude_r = exclude ? new RegExp(parseExclude(exclude)) : null;
         const failed = [];
         const successful = [];
         const status = yield ssh.putDirectory(local, remote, {
             recursive: recursive,
             concurrency: concurrency,
-            validate: (path) => (!path_1.default.basename(path).startsWith('.') || dotfiles) && (exclude == '' || !path_1.default.basename(path).match(exclude_r)),
+            validate: (path) => (!path_1.default.basename(path).startsWith('.') || dotfiles) && (!exclude || !path_1.default.basename(path).match(exclude_r)),
             tick: function (localPath, remotePath, error) {
                 if (error) {
                     if (verbose) {
