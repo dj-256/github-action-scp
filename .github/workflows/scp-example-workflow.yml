@@ -105,4 +105,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           rmRemote: true
           port: ${{ secrets.SSH_PORT }}
-          exclude: "*.js"
+          exclude: ".*\.js"
