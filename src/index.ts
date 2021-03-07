@@ -250,6 +250,7 @@ function parseExclude(path: string) {
   res = path.replace(/\*/g, '.*');
   res = res.replace(/\./g, '\\.');
   res = '^'+res+'$';
+  console.log(res);
   return res;
 }
 
