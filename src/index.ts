@@ -162,7 +162,7 @@ async function putDirectory(
   recursive = true,
   exclude: string
 ) {
-  const exclude_r = new RegExp(parseExclude(exclude));
+  const exclude_r = exclude!='' ? new RegExp(parseExclude(exclude)) : null;
   const failed: {local: string; remote: string}[] = [];
   const successful = [];
   const status = await ssh.putDirectory(local, remote, {
