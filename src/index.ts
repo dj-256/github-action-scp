@@ -246,9 +246,9 @@ async function putMany<T>(
 }
 
 function parseExclude(path: string) {
-  let res: string;
-  res = path.replace(/\*/g, '.*');
+  let res = path;
   res = res.replace(/\./g, '\\.');
+  res = res.replace(/\*/g, '.*');
   res = '^'+res+'$';
   console.log(res);
   return res;
