@@ -18,6 +18,7 @@ jobs:
           touch test/oof.txt
           touch test/.dot.txt
           touch test/dummy.js
+          touch test/oof.js
       - name: Copy folder content recursively to remote
         uses: ./
         with:
@@ -95,7 +96,7 @@ jobs:
           rmRemote: true
           dotfiles: true
           port: ${{ secrets.SSH_PORT }}
-      - name: Excluding files
+      - name: Excluding JS files
         uses: ./
         with:
           local: test/
@@ -105,4 +106,26 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           rmRemote: true
           port: ${{ secrets.SSH_PORT }}
-          exclude: '.*\.js'
+          exclude: '*.js'
+      - name: Excluding files named oof
+        uses: ./
+        with:
+          local: test/
+          remote: scp/directory
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
+          rmRemote: true
+          port: ${{ secrets.SSH_PORT }}
+          exclude: 'oof.*'
+      - name: Excluding files of a specific folder
+        uses: ./
+        with:
+          local: test/
+          remote: scp/directory
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
+          rmRemote: true
+          port: ${{ secrets.SSH_PORT }}
+          exclude: 'directory/dir2/*'

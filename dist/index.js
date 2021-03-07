@@ -143,7 +143,7 @@ function scp(ssh, local, remote, dotfiles = false, concurrency, verbose = true, 
 }
 function putDirectory(ssh, local, remote, dotfiles = false, concurrency = 3, verbose = false, recursive = true, exclude) {
     return __awaiter(this, void 0, void 0, function* () {
-        const exclude_r = new RegExp(exclude);
+        const exclude_r = new RegExp(parseExclude(exclude));
         const failed = [];
         const successful = [];
         const status = yield ssh.putDirectory(local, remote, {
@@ -214,6 +214,13 @@ function putMany(array, asyncFunction) {
             yield asyncFunction(el);
         }
     });
+}
+function parseExclude(path) {
+    let res;
+    res = path.replace(/\*/g, '.*');
+    res = res.replace(/\./g, '\\.');
+    res = '^' + res + '$';
+    return res;
 }
 process.on('uncaughtException', (err) => {
     if (err['code'] !== 'ECONNRESET')

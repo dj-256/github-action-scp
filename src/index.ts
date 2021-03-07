@@ -162,7 +162,7 @@ async function putDirectory(
   recursive = true,
   exclude: string
 ) {
-  const exclude_r = new RegExp(exclude);
+  const exclude_r = new RegExp(parseExclude(exclude));
   const failed: {local: string; remote: string}[] = [];
   const successful = [];
   const status = await ssh.putDirectory(local, remote, {
@@ -243,6 +243,14 @@ async function putMany<T>(
   for (const el of array) {
     await asyncFunction(el);
   }
+}
+
+function parseExclude(path: string) {
+  let res: string;
+  res = path.replace(/\*/g, '.*');
+  res = res.replace(/\./g, '\\.');
+  res = '^'+res+'$';
+  return res;
 }
 
 process.on('uncaughtException', (err) => {
