@@ -19,6 +19,13 @@ jobs:
           touch test/.dot.txt
           touch test/dummy.js
           touch test/oof.js
+          mkdir test/directory
+          mkdir test/directory/dir{1..3}
+          touch test/directory/dir1/file1
+          touch test/directory/dir2/file{1..2}
+          touch test/directory/dir3/file{1..3}
+      - name: build project
+        run: npm run-script build
       - name: Copy folder content recursively to remote
         uses: ./
         with:

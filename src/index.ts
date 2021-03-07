@@ -169,7 +169,7 @@ async function putDirectory(
     recursive: recursive,
     concurrency: concurrency,
     validate: (path: string) =>
-      (!fsPath.basename(path).startsWith('.') || dotfiles) && (!exclude || !fsPath.basename(path).match(exclude_r)),
+      (!fsPath.basename(path).startsWith('.') || dotfiles) && (!exclude || !path.replace(new RegExp(local+'/?'), '').match(exclude_r)),
     tick: function (localPath, remotePath, error) {
       if (error) {
         if (verbose) {
@@ -249,7 +249,7 @@ function parseExclude(path: string) {
   let res: string;
   res = path.replace(/\*/g, '.*');
   res = res.replace(/\./g, '\\.');
-  res = res;
+  res = '^'+res+'$';
   return res;
 }
 

@@ -149,7 +149,7 @@ function putDirectory(ssh, local, remote, dotfiles = false, concurrency = 3, ver
         const status = yield ssh.putDirectory(local, remote, {
             recursive: recursive,
             concurrency: concurrency,
-            validate: (path) => (!path_1.default.basename(path).startsWith('.') || dotfiles) && (!exclude || !path_1.default.basename(path).match(exclude_r)),
+            validate: (path) => (!path_1.default.basename(path).startsWith('.') || dotfiles) && (!exclude || !path.replace(new RegExp(local + '/?'), '').match(exclude_r)),
             tick: function (localPath, remotePath, error) {
                 if (error) {
                     if (verbose) {
@@ -219,7 +219,7 @@ function parseExclude(path) {
     let res;
     res = path.replace(/\*/g, '.*');
     res = res.replace(/\./g, '\\.');
-    res = res;
+    res = '^' + res + '$';
     return res;
 }
 process.on('uncaughtException', (err) => {
