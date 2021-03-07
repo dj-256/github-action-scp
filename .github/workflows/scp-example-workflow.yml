@@ -26,6 +26,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
           #privateKey: ${{ secrets.PRIVATE_KEY}}
+          port: ${{ secrets.SSH_PORT }}
       - name: Copy folder content recursively to remote (clean directory)
         uses: ./
         with:
@@ -37,6 +38,7 @@ jobs:
           #privateKey: ${{ secrets.PRIVATE_KEY}}
           rmRemote: true
           dotfiles: true
+          port: ${{ secrets.SSH_PORT }}
       - name: Copy folder content recursively to remote (atomic put)
         uses: ./
         with:
@@ -49,6 +51,7 @@ jobs:
           rmRemote: true
           dotfiles: true
           atomicPut: true
+          port: ${{ secrets.SSH_PORT }}
       - name: Copy single file to remote
         uses: ./
         with:
@@ -58,6 +61,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
           #privateKey: ${{ secrets.PRIVATE_KEY}}
+          port: ${{ secrets.SSH_PORT }}
       - name: Copy dotfile to remote
         uses: ./
         with:
@@ -68,6 +72,7 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           #privateKey: ${{ secrets.PRIVATE_KEY}}
           dotfiles: true
+          port: ${{ secrets.SSH_PORT }}
       - name: Copy with user/pw
         uses: ./
         with:
@@ -76,6 +81,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
       - name: With ENV
         uses: ./
         with:
@@ -87,6 +93,7 @@ jobs:
           #privateKey: ${{ secrets.PRIVATE_KEY}}
           rmRemote: true
           dotfiles: true
+          port: ${{ secrets.SSH_PORT }}
       - name: Excluding files
         uses: ./
         with:
@@ -96,3 +103,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
           rmRemote: true
+          port: ${{ secrets.SSH_PORT }}
