@@ -22,6 +22,7 @@ async function run() {
   const remote: string = core.getInput('remote');
   const rmRemote: boolean = !!core.getInput('rmRemote') || false;
   const atomicPut: string = core.getInput('atomicPut');
+  const exclude: string = core.getInput('exclude') || null;
 
   if (atomicPut) {
     // patch SFTPStream to atomically rename files
@@ -65,7 +66,8 @@ async function run() {
       concurrency,
       verbose,
       recursive,
-      rmRemote
+      rmRemote,
+      exclude
     );
 
     ssh.dispose();
@@ -118,7 +120,8 @@ async function scp(
   concurrency: number,
   verbose = true,
   recursive = true,
-  rmRemote = false
+  rmRemote = false,
+  exclude: string,
 ) {
   console.log(`Starting scp Action: ${local} to ${remote}`);
 
@@ -134,7 +137,8 @@ async function scp(
         dotfiles,
         concurrency,
         verbose,
-        recursive
+        recursive,
+        exclude
       );
     } else {
       await putFile(ssh, local, remote, verbose);
@@ -155,7 +159,8 @@ async function putDirectory(
   dotfiles = false,
   concurrency = 3,
   verbose = false,
-  recursive = true
+  recursive = true,
+  exclude: string
 ) {
   const failed: {local: string; remote: string}[] = [];
   const successful = [];
@@ -163,7 +168,7 @@ async function putDirectory(
     recursive: recursive,
     concurrency: concurrency,
     validate: (path: string) =>
-      !fsPath.basename(path).startsWith('.') || dotfiles,
+      (!fsPath.basename(path).startsWith('.') || dotfiles) && (exclude=='' || !fsPath.basename(path).startsWith(exclude)),
     tick: function (localPath, remotePath, error) {
       if (error) {
         if (verbose) {

@@ -54,6 +54,10 @@ inputs:
     description: "Upload files to temporary file first, then rename once upload completed"
     required: false
     default: false
+  exclude:
+    description: "Paths excluded from the copy"
+    required: false
+    default: ''
 runs:
   using: "node12"
   main: "dist/index.js"
