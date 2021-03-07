@@ -25,7 +25,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+          #privateKey: ${{ secrets.PRIVATE_KEY}}
       - name: Copy folder content recursively to remote (clean directory)
         uses: ./
         with:
@@ -34,9 +34,9 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+          #privateKey: ${{ secrets.PRIVATE_KEY}}
           rmRemote: true
-          dotfiles: true   
+          dotfiles: true
       - name: Copy folder content recursively to remote (atomic put)
         uses: ./
         with:
@@ -45,10 +45,10 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+          #privateKey: ${{ secrets.PRIVATE_KEY}}
           rmRemote: true
-          dotfiles: true        
-          atomicPut: true        
+          dotfiles: true
+          atomicPut: true
       - name: Copy single file to remote
         uses: ./
         with:
@@ -57,7 +57,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+          #privateKey: ${{ secrets.PRIVATE_KEY}}
       - name: Copy dotfile to remote
         uses: ./
         with:
@@ -66,7 +66,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+          #privateKey: ${{ secrets.PRIVATE_KEY}}
           dotfiles: true
       - name: Copy with user/pw
         uses: ./
@@ -75,7 +75,7 @@ jobs:
           remote: scp/user/pw/oof.txt
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.PASSWORD }}     
+          password: ${{ secrets.PASSWORD }}
       - name: With ENV
         uses: ./
         with:
@@ -84,6 +84,14 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
-          privateKey: ${{ secrets.PRIVATE_KEY}}
+          #privateKey: ${{ secrets.PRIVATE_KEY}}
           rmRemote: true
-          dotfiles: true    
+          dotfiles: true
+      - name: Excluding files
+        with:
+          local: test/
+          remote: scp/directory
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
+          rmRemote: true

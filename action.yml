@@ -55,7 +55,7 @@ inputs:
     required: false
     default: false
   exclude:
-    description: "Paths excluded from the copy"
+    description: "Paths excluded from the copy (relative to remote path)"
     required: false
     default: ''
 runs:

@@ -70,6 +70,7 @@ Check out [the workflow example](.github/workflows/scp-example-workflow.yml) for
 
 - **atomicPut** - _boolean_ - Upload files to temporary file first, then rename once upload completed. **Default:** `false`
 - **rmRemote** - _boolean_ - Clean directory before uploading. **Default:** `false`
+- **exclude** - _string_ - Paths excluded from the copy (relative to remote path)
 
 ## Development
 
