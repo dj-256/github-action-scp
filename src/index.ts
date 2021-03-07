@@ -162,14 +162,14 @@ async function putDirectory(
   recursive = true,
   exclude: string
 ) {
-  const exclude_r = exclude!='' ? new RegExp(parseExclude(exclude)) : null;
+  const exclude_r = exclude ? new RegExp(parseExclude(exclude)) : null;
   const failed: {local: string; remote: string}[] = [];
   const successful = [];
   const status = await ssh.putDirectory(local, remote, {
     recursive: recursive,
     concurrency: concurrency,
     validate: (path: string) =>
-      (!fsPath.basename(path).startsWith('.') || dotfiles) && (exclude=='' || !fsPath.basename(path).match(exclude_r)),
+      (!fsPath.basename(path).startsWith('.') || dotfiles) && (!exclude || !fsPath.basename(path).match(exclude_r)),
     tick: function (localPath, remotePath, error) {
       if (error) {
         if (verbose) {
