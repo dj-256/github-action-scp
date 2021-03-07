@@ -216,10 +216,11 @@ function putMany(array, asyncFunction) {
     });
 }
 function parseExclude(path) {
-    let res;
-    res = path.replace(/\*/g, '.*');
+    let res = path;
     res = res.replace(/\./g, '\\.');
+    res = res.replace(/\*/g, '.*');
     res = '^' + res + '$';
+    console.log(res);
     return res;
 }
 process.on('uncaughtException', (err) => {

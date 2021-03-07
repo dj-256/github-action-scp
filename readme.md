@@ -32,6 +32,36 @@ Simple GitHub Action to copy a folder or single file to a remote server using SS
 
 ```
 
+**Copy a folder excluding some files**
+```yml
+- name: Excluding JS files
+        uses: ./
+        with:
+          local: test/
+          remote: scp/directory
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
+          rmRemote: true
+          port: ${{ secrets.SSH_PORT }}
+          exclude: '*.js'
+```
+
+**Copy a folder excluding a subfolder**
+```yml
+- name: Excluding files of a specific folder
+    uses: ./
+    with:
+      local: test/
+      remote: scp/directory
+      host: ${{ secrets.HOST }}
+      username: ${{ secrets.SSH_USER }}
+      password: ${{ secrets.PASSWORD }}
+      rmRemote: true
+      port: ${{ secrets.SSH_PORT }}
+      exclude: 'directory/dir2/*'
+```
+
 🔐 Set your secrets here: `https://github.com/USERNAME/REPO/settings/secrets`.
 
 Check out [the workflow example](.github/workflows/scp-example-workflow.yml) for a minimalistic yaml workflow in GitHub Actions.
