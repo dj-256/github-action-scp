@@ -1,12 +1,12 @@
 {
   "name": "@dj-256/github-action-scp",
   "version": "0.7.4",
+  "main": "dist/bundle.js",
   "description": "Copy a folder to a remote server using SSH.",
   "repository": {
     "type": "git",
     "url": "https://github.com/dj-256/github-action-ssh"
   },
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc -p .",
     "format": "prettier --write **/*.ts",
@@ -34,6 +34,9 @@
     "@types/node": "^12.7.12",
     "@zeit/ncc": "^0.22.3",
     "prettier": "^2.2.0",
-    "typescript": "4.1.2"
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.1.2",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0"
   }
 }
