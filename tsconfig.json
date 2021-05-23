@@ -4,7 +4,7 @@
     "module": "commonjs",
     "lib": ["es6", "es2015", "dom"],
     "declaration": true,
-    "outDir": "dist",
+    "outDir": "lib",
     "rootDir": "src",
     "strict": false,
     "types": ["node"],
@@ -14,5 +14,5 @@
     "emitDecoratorMetadata": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+//  "exclude": ["node_modules"]
 }
